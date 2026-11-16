@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClimaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\MantenimientoController;
@@ -22,6 +23,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
     Route::get('/', DashboardController::class)->name('dashboard');
+    Route::get('clima', ClimaController::class)->middleware('throttle:15,1')->name('clima.index');
     Route::get('equipos', [EquipoController::class, 'index'])->name('equipos.index');
     Route::get('mantenimientos', [MantenimientoController::class, 'index'])->name('mantenimientos.index');
     Route::patch('mantenimientos/{mantenimiento}/estado', [MantenimientoController::class, 'updateEstado'])
