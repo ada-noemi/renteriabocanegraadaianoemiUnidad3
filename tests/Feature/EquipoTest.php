@@ -14,7 +14,7 @@ class EquipoTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->actingAs(User::factory()->create());
+        $this->actingAs(User::factory()->administrador()->create());
     }
 
     private function datos(array $changes = []): array

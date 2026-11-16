@@ -15,7 +15,7 @@ class MantenimientoTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->actingAs(User::factory()->create());
+        $this->actingAs(User::factory()->administrador()->create());
     }
 
     private function equipo(string $codigo = 'EQ-M01'): Equipo

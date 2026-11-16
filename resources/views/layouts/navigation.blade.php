@@ -1,5 +1,11 @@
 <nav aria-label="Navegación principal" class="space-y-2 p-4">
-    @foreach (['dashboard' => 'Dashboard', 'equipos.index' => 'Equipos', 'mantenimientos.index' => 'Mantenimientos'] as $route => $label)
+    @php
+        $links = ['dashboard' => 'Dashboard', 'equipos.index' => 'Equipos', 'mantenimientos.index' => 'Mantenimientos'];
+        if (auth()->user()->can('administrar')) {
+            $links['usuarios.index'] = 'Usuarios';
+        }
+    @endphp
+    @foreach ($links as $route => $label)
         @php($active = request()->routeIs(str_ends_with($route, '.index') ? str_replace('.index', '.*', $route) : $route))
         <a href="{{ route($route) }}"
            @if ($active) aria-current="page" @endif
