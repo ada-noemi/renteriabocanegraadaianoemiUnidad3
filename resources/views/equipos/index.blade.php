@@ -5,7 +5,9 @@
 @section('content')
     <div class="flex flex-wrap items-center justify-between gap-4">
         <p class="text-sm text-slate-600">Consulta y administra los equipos y su información general.</p>
+        @can('administrar')
         <button type="button" data-open-modal="equipo-create" class="rounded-lg bg-teal-700 px-5 py-3 text-sm font-medium text-white hover:bg-teal-800">Registrar equipo</button>
+        @endcan
     </div>
     @if (session('error'))
         <div role="alert" class="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-800">{{ session('error') }}</div>
@@ -40,10 +42,14 @@
                             </td>
                             <td class="whitespace-nowrap px-6 py-4">{{ $equipo->fecha_registro->format('d/m/Y') }}</td>
                             <td class="px-6 py-4">
+                                @can('administrar')
                                 <div class="flex items-center gap-4">
                                     <button type="button" data-open-modal="equipo-edit-{{ $equipo->id }}" aria-label="Editar {{ $equipo->nombre }}" class="font-medium text-teal-700 hover:underline">Editar</button>
                                     <button type="button" data-open-modal="equipo-delete-{{ $equipo->id }}" aria-label="Eliminar {{ $equipo->nombre }}" class="font-medium text-red-700 hover:underline">Eliminar</button>
                                 </div>
+                                @else
+                                    <span class="text-slate-500">Solo consulta</span>
+                                @endcan
                             </td>
                         </tr>
                     @empty
@@ -56,6 +62,7 @@
             <div class="border-t border-slate-200 p-6">{{ $equipos->links() }}</div>
         @endif
     </section>
+    @can('administrar')
     <div class="contents">
     @include('equipos.modal', ['equipo' => new \App\Models\Equipo])
     @foreach ($equipos as $equipo)
@@ -66,4 +73,5 @@
         @include('equipos.modal', ['equipo' => $equipoModal])
     @endif
     </div>
+    @endcan
 @endsection

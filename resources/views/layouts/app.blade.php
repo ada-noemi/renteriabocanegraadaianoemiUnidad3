@@ -31,6 +31,7 @@
                 @auth
                     <div class="flex flex-wrap items-center gap-3 text-sm">
                         <span class="max-w-64 break-words font-medium">{{ auth()->user()->name }}</span>
+                        <span class="rounded-full bg-slate-100 px-3 py-1 text-xs">{{ auth()->user()->isAdmin() ? 'Administrador' : 'Técnico' }}</span>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
                             <button type="submit" class="rounded-lg border border-slate-300 px-4 py-2 font-medium hover:bg-slate-50">Cerrar sesión</button>

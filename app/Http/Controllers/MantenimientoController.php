@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MantenimientoRequest;
+use App\Http\Requests\UpdateMantenimientoEstadoRequest;
 use App\Models\Equipo;
 use App\Models\Mantenimiento;
 use Illuminate\Http\RedirectResponse;
@@ -43,6 +44,13 @@ class MantenimientoController extends Controller
         $mantenimiento->update($request->validated());
 
         return to_route('mantenimientos.index')->with('success', 'Mantenimiento actualizado correctamente.');
+    }
+
+    public function updateEstado(UpdateMantenimientoEstadoRequest $request, Mantenimiento $mantenimiento): RedirectResponse
+    {
+        $mantenimiento->update($request->safe()->only('estado'));
+
+        return to_route('mantenimientos.index')->with('success', 'Estado del mantenimiento actualizado correctamente.');
     }
 
     public function destroy(Mantenimiento $mantenimiento): RedirectResponse
