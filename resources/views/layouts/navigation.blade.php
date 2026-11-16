@@ -1,6 +1,6 @@
 <nav aria-label="Navegación principal" class="space-y-2 p-4">
     @php
-        $links = ['dashboard' => 'Dashboard', 'equipos.index' => 'Equipos', 'mantenimientos.index' => 'Mantenimientos'];
+        $links = ['dashboard' => 'Dashboard', 'equipos.index' => 'Equipos', 'mantenimientos.index' => 'Mantenimientos', 'clima.index' => 'Clima'];
         if (auth()->user()->can('administrar')) {
             $links['usuarios.index'] = 'Usuarios';
         }
